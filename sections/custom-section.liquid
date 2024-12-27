@@ -7,24 +7,42 @@
     {% if collection_handle %}
       {% assign collection = collections[collection_handle] %}
       {% if collection.products.size > 0 %}
+        {% assign sorted_products = collection.products | sort: 'price' %}
         <ul class="custom-section__product-list">
-          {% for product in collection.products limit: 4 %}
-            <li class="custom-section__product-item">
-              <div class="custom-section__product-image-container">
-                <img 
-                  src="{{ product.featured_image | img_url: 'original' }}" 
-                  alt="{{ product.title }}" 
-                  width="100%" 
-                  height="auto" 
-                  class="custom-section__product-image">
-              </div>
-              <a href="{{ product.url }}" class="custom-section__product-link">
-                <h3 class="custom-section__product-title">{{ product.title }}</h3>
-              </a>
-              <button class="custom-section__add-to-cart-btn" data-product-id="{{ product.id }}">
-                Add to cart - {{ product.price | money }}
-              </button>
-            </li>
+          {% for product in sorted_products limit: 4 %}
+            {% assign product_in_cart = false %}
+            
+            {% for item in cart.items %}
+              {% if item.product.id == product.id %}
+                {% assign product_in_cart = true %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+            
+            {% unless product_in_cart %}
+              <li class="custom-section__product-item">
+                <div class="custom-section__product-image-container">
+                  <img 
+                    src="{{ product.featured_image | img_url: 'original' }}" 
+                    alt="{{ product.title }}" 
+                    width="100%" 
+                    height="auto" 
+                    class="custom-section__product-image">
+                </div>
+                <a href="{{ product.url }}" class="custom-section__product-link">
+                  <h3 class="custom-section__product-title">{{ product.title }}</h3>
+                </a>
+                <form action="/cart/add" method="post" class="custom-section__add-to-cart-form">
+                  <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                  <button
+                    class="custom-section__add-to-cart-btn"
+                    type="submit"
+                  >
+                    Add to cart - {{ product.price | money }}
+                  </button>
+                </form>
+              </li>
+            {% endunless %}
           {% endfor %}
         </ul>
       {% else %}
@@ -33,7 +51,6 @@
     {% endif %}
   </div>
 </section>
-
 
 {% schema %}
 {
