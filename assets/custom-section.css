@@ -1,51 +1,43 @@
-@charset "UTF-8";
 .custom-section {
-  padding: 20px;
-  background-color: #f9f9f9;
-  /* Стилі для мобільних пристроїв */
+  background-color: #F5F5F5;
 }
 .custom-section__title {
   font-size: 2rem;
   margin-bottom: 20px;
   text-align: center;
-  color: #333;
+  color: #656874;
 }
 .custom-section__product-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
   gap: 20px;
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
+@media (min-width: 768px) {
+  .custom-section__product-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 .custom-section__product-item {
   width: 100%;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   transition: all 0.3s ease;
-}
-.custom-section__product-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 .custom-section__product-link {
   display: block;
   text-decoration: none;
 }
 .custom-section__product-image {
-  width: 100px;
+  width: 100%;
   height: auto;
-  border-radius: 8px;
+  display: block;
 }
 .custom-section__product-title {
   font-size: 1.25rem;
   margin: 10px 0;
-  color: #333;
+  color: #656874;
 }
 .custom-section__add-to-cart-btn {
   background-color: #007bff;
@@ -56,17 +48,4 @@
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-}
-.custom-section__add-to-cart-btn:hover {
-  background-color: #0056b3;
-}
-@media (max-width: 767px) {
-  .custom-section__product-item {
-    width: 100%;
-  }
-}
-@media (min-width: 768px) {
-  .custom-section__product-item {
-    width: 48%;
-  }
 }
