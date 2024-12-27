@@ -9,12 +9,11 @@
           <li>
             <a href="{{ product.url }}">
               <img 
-                src="{{ product.featured_image | image_url: 'original' }}" 
+                src="{{ product.featured_image | image_url: 'medium' }}" 
                 alt="{{ product.title }}" 
                 width="300" 
                 height="300">
-              <p>{{ product.title }}</p>
-              <p>{{ product.price | money }}</p>
+              <h3>{{ product.title }}</h3>
             </a>
           </li>
         {% endfor %}
