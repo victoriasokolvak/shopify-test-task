@@ -47,9 +47,16 @@
         "stack_images_on_mobile": false,
         "show_text_below": false
       }
+    },
+    "custom_section_8Kc9yE": {
+      "type": "custom-section",
+      "settings": {
+        "collection": ""
+      }
     }
   },
   "order": [
-    "image_banner"
+    "image_banner",
+    "custom_section_8Kc9yE"
   ]
 }
