@@ -48,15 +48,28 @@
         "show_text_below": false
       }
     },
-    "custom_section_6eFiK3": {
-      "type": "custom-section",
+    "custom_section": {
+      "type": "custom-section", 
+      "blocks": {
+        "product_list": {
+          "type": "product-list",
+          "settings": {
+            "heading": "Featured Products",
+            "collection": "your-collection-handle"
+          }
+        }
+      },
+      "block_order": [
+        "product_list"
+      ],
       "settings": {
-        "collection": "featured-products"
-      }
+        "color_scheme": "scheme-1",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center"
     }
   },
   "order": [
     "image_banner",
-    "custom_section_6eFiK3"
+    "custom_section"
   ]
 }
