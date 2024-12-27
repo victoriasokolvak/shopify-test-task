@@ -47,9 +47,16 @@
         "stack_images_on_mobile": false,
         "show_text_below": false
       }
+    },
+    "custom_section_kFyrGD": {
+      "type": "custom-section",
+      "settings": {
+        "collection": "featured-products"
+      }
     }
   },
   "order": [
-    "image_banner"
+    "image_banner",
+    "custom_section_kFyrGD"
   ]
 }
