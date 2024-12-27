@@ -1,4 +1,28 @@
-<section>{{ section.settings.collection }}</section>
+<section class="custom-section">
+  {% assign collection_handle = section.settings.collection %}
+  {% if collection_handle %}
+    {% assign collection = collections[collection_handle] %}
+    {% if collection.products.size > 0 %}
+      <ul>
+        {% for product in collection.products %}
+          <li>
+            <a href="{{ product.url }}">
+              <img 
+                src="{{ product.featured_image | image_url: 'medium' }}" 
+                alt="{{ product.title }}" 
+                width="300" 
+                height="300">
+              <p>{{ product.title }}</p>
+              <p>{{ product.price | money }}</p>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No products found in this collection.</p>
+    {% endif %}
+  {% endif %}
+</section>
 
 {% schema %}
 {
