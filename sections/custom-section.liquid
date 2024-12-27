@@ -1,0 +1,51 @@
+<section class="custom-section">
+  <h2 class="section-title">Featured Products</h2>
+  {% assign collection_handle = 'featured-products' %}
+  {% if collection_handle %}
+    {% assign collection = collections[collection_handle] %}
+    {% if collection.products.size > 0 %}
+      <ul class="product-list">
+        {% for product in collection.products limit: 4 %}
+          <li class="product-item">
+            <a href="{{ product.url }}" class="product-link">
+              <img 
+                src="{{ product.featured_image | image_url: 'medium' }}" 
+                alt="{{ product.title }}" 
+                width="300" 
+                height="300" 
+                class="product-image">
+              <h3 class="product-title">{{ product.title }}</h3>
+              <button class="add-to-cart-btn" data-product-id="{{ product.id }}">
+                Add to cart - {{ product.price | money }}
+              </button>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No products found in this collection.</p>
+    {% endif %}
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Custom section",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default custom section"
+    }
+  ],
+  "tag": "section",
+  "class": "custom-section",
+  "limit": 1,
+
+}
+{% endschema %}

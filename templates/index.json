@@ -47,9 +47,30 @@
         "stack_images_on_mobile": false,
         "show_text_below": false
       }
+    },
+    "custom_section": {
+      "type": "custom-section", 
+      "blocks": {
+        "product_list": {
+          "type": "product-list",
+          "settings": {
+            "heading": "Featured Products",
+            "collection": "your-collection-handle"
+          }
+        }
+      },
+      "block_order": [
+        "product_list"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center"
+      }
     }
   },
   "order": [
-    "image_banner"
+    "image_banner",
+    "custom_section"
   ]
 }
