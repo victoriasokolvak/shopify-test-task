@@ -1,32 +1,39 @@
+{{ 'custom-section.css' | asset_url | stylesheet_tag }}
+
 <section class="custom-section">
-  <h2 class="section-title">Featured Products</h2>
-  {% assign collection_handle = 'featured-products' %}
-  {% if collection_handle %}
-    {% assign collection = collections[collection_handle] %}
-    {% if collection.products.size > 0 %}
-      <ul class="product-list">
-        {% for product in collection.products limit: 4 %}
-          <li class="product-item">
-            <a href="{{ product.url }}" class="product-link">
-              <img 
-                src="{{ product.featured_image | image_url: 'medium' }}" 
-                alt="{{ product.title }}" 
-                width="300" 
-                height="300" 
-                class="product-image">
-              <h3 class="product-title">{{ product.title }}</h3>
-              <button class="add-to-cart-btn" data-product-id="{{ product.id }}">
+  <div class="custom-section__inner-container">
+    <h2 class="custom-section__title">Featured Products</h2>
+    {% assign collection_handle = 'featured-products' %}
+    {% if collection_handle %}
+      {% assign collection = collections[collection_handle] %}
+      {% if collection.products.size > 0 %}
+        <ul class="custom-section__product-list">
+          {% for product in collection.products limit: 4 %}
+            <li class="custom-section__product-item">
+              <div class="custom-section__product-image-container">
+                <img 
+                  src="{{ product.featured_image | img_url: 'original' }}" 
+                  alt="{{ product.title }}" 
+                  width="100%" 
+                  height="auto" 
+                  class="custom-section__product-image">
+              </div>
+              <a href="{{ product.url }}" class="custom-section__product-link">
+                <h3 class="custom-section__product-title">{{ product.title }}</h3>
+              </a>
+              <button class="custom-section__add-to-cart-btn" data-product-id="{{ product.id }}">
                 Add to cart - {{ product.price | money }}
               </button>
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p>No products found in this collection.</p>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No products found in this collection.</p>
+      {% endif %}
     {% endif %}
-  {% endif %}
+  </div>
 </section>
+
 
 {% schema %}
 {

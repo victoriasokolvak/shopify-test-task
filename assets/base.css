@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Gothic A1';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./GothicA1-Regular.woff2') format('woff2'),
+       url('./GothicA1-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Gothic A1';
+  font-style: normal;
+  font-weight: 900;
+  src: url('./GothicA1-Bold.woff2') format('woff2'),
+       url('./GothicA1-Bold.woff') format('woff');
+}
+
 :root {
   --alpha-button-background: 1;
   --alpha-button-border: 1;

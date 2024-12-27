@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-{
+ {
   "sections": {
     "image_banner": {
       "type": "image-banner",
@@ -66,6 +66,7 @@
         "color_scheme": "scheme-1",
         "desktop_content_alignment": "center",
         "mobile_content_alignment": "center"
+      }
     }
   },
   "order": [
@@ -73,3 +74,4 @@
     "custom_section"
   ]
 }
+
