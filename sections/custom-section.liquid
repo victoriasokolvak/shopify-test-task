@@ -1,53 +1,73 @@
-{{ 'custom-section.css' | asset_url | stylesheet_tag }}
-
-<section class="custom-section">
+<section class="custom-section" id="custom-section">
   <div class="custom-section__inner-container">
     <h2 class="custom-section__title">Featured Products</h2>
-    {% assign collection_handle = 'featured-products' %}
-    {% if collection_handle %}
-      {% assign collection = collections[collection_handle] %}
-      {% if collection.products.size > 0 %}
+    
+    {% assign collection_handle = section.settings.collection | default: 'featured-products' %}
+    {% assign collection = collections[collection_handle] %}
+    
+    {% if collection %}
+      {% assign all_products_in_cart = true %}
+      
+      <ul class="custom-section__product-list">
         {% assign sorted_products = collection.products | sort: 'price' %}
-        <ul class="custom-section__product-list">
-          {% for product in sorted_products limit: 4 %}
-            {% assign product_in_cart = false %}
-            
-            {% for item in cart.items %}
-              {% if item.product.id == product.id %}
-                {% assign product_in_cart = true %}
-                {% break %}
-              {% endif %}
-            {% endfor %}
-            
-            {% unless product_in_cart %}
-              <li class="custom-section__product-item">
-                <div class="custom-section__product-image-container">
+        
+        {% for product in sorted_products %}
+          {% assign product_in_cart = false %}
+          
+          {% for item in cart.items %}
+            {% if item.product.id == product.id %}
+              {% assign product_in_cart = true %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+          
+          {% unless product_in_cart %}
+            <li class="custom-section__product-item">
+              <div class="custom-section__product-image-container">
+                <a href="{{ product.url }}">
                   <img 
                     src="{{ product.featured_image | img_url: 'original' }}" 
                     alt="{{ product.title }}" 
                     width="100%" 
                     height="auto" 
                     class="custom-section__product-image">
+                  </a>
                 </div>
-                <a href="{{ product.url }}" class="custom-section__product-link">
-                  <h3 class="custom-section__product-title">{{ product.title }}</h3>
-                </a>
-                <form action="/cart/add" method="post" class="custom-section__add-to-cart-form">
-                  <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-                  <button
-                    class="custom-section__add-to-cart-btn"
-                    type="submit"
-                  >
-                    Add to cart - {{ product.price | money }}
-                  </button>
-                </form>
-              </li>
-            {% endunless %}
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p>No products found in this collection.</p>
+              <a href="{{ product.url }}" class="custom-section__product-link">
+                <h3 class="custom-section__product-title">{{ product.title }}</h3>
+              </a>
+              <form action="/cart/add" method="post" class="custom-section__add-to-cart-form">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                <button
+                  class="custom-section__add-to-cart-btn"
+                  type="button"
+                  onclick="addToCart('{{ product.variants.first.id }}')"
+                >
+                  Add to cart - {{ product.price | money }}
+                </button>
+              </form>
+            </li>
+            {% assign all_products_in_cart = false %}
+          {% endunless %}
+        {% endfor %}
+      </ul>
+      
+      {% if all_products_in_cart %}
+        <div class="custom-section__no-products-message">
+          <p>All products from this collection are already in your cart.</p>
+        </div>
       {% endif %}
+      
+    {% else %}
+      <div class="custom-section__no-products-message">
+        <p>No products found in this collection.</p>
+      </div>
+    {% endif %}
+    
+    {% if section.settings.collection == "" %}
+      <div class="custom-section__no-products-message">
+        <p>Please select a collection in the section settings.</p>
+      </div>
     {% endif %}
   </div>
 </section>
@@ -59,7 +79,26 @@
     {
       "type": "collection",
       "id": "collection",
-      "label": "Collection"
+      "label": "Select a collection",
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_list",
+      "name": "Product List",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Featured Products"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
     }
   ],
   "presets": [
@@ -69,7 +108,10 @@
   ],
   "tag": "section",
   "class": "custom-section",
-  "limit": 1,
-
+  "limit": 1
 }
 {% endschema %}
+
+{{ 'custom-section.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'custom-section.js' | asset_url }}" defer></script>

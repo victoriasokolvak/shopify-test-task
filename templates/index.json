@@ -52,21 +52,16 @@
       "type": "custom-section", 
       "blocks": {
         "product_list": {
-          "type": "product-list",
+          "type": "product_list",
           "settings": {
             "heading": "Featured Products",
-            "collection": "your-collection-handle"
+            "collection": "featured-products"
           }
         }
       },
       "block_order": [
         "product_list"
       ],
-      "settings": {
-        "color_scheme": "scheme-1",
-        "desktop_content_alignment": "center",
-        "mobile_content_alignment": "center"
-      }
     }
   },
   "order": [
@@ -74,4 +69,3 @@
     "custom_section"
   ]
 }
-
