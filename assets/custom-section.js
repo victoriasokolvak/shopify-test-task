@@ -11,6 +11,7 @@ function addToCart(productId) {
     .then(() => {
       updateProductList();
       updateCartCounter();
+      showCartPopup()
     })
     .catch((error) => {
       console.error(error);
@@ -49,4 +50,14 @@ function updateCartCounter() {
       if (!cart.item_count) bubble.remove();
     })
     .catch((error) => console.error('Error updating cart counter:', error));
+}
+
+function showCartPopup() {
+  const cartNotification = document.getElementById('cart-notification');
+  if (cartNotification) {
+    cartNotification.classList.add('active');
+    setTimeout(() => {
+      cartNotification.classList.remove('active');
+    }, 5000);
+  }
 }
