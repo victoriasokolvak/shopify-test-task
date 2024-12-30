@@ -1,6 +1,6 @@
 # Shopify Theme Development Setup
 
-Ця інструкція допоможе вам налаштувати та запустити тему Shopify на вашому акаунті локально, використовуючи репозиторій з GitHub.
+This guide will help you set up and run a Shopify theme on your account locally, using a GitHub repository.
 
 ## Вимоги
 - **Shopify Store**
@@ -8,36 +8,37 @@
 - **Git**
 - **Node.js**
 
-Крок 1: Встановлення Shopify CLI
-Для початку необхідно встановити Shopify CLI. Використовуйте офіційну документацію для вашої операційної системи:
-Після установки, перевірте, чи все працює:
+Step 1: Installing Shopify CLI
+First, you need to install Shopify CLI.
+Use the official documentation for your operating system:
+After installation, check if everything is working:
 
         shopify version
 
-Крок 2: Клонування репозиторію
-Клонуйте репозиторій теми з GitHub:
+Step 2: Cloning the Repository
+Clone the theme repository from GitHub:
 
     git clone https://github.com/victoriasokolvak/shopify-test-task.git
     cd shopify-test-task
 
-Крок 3: Авторизація в Shopify
-Для того, щоб підключитися до вашого Shopify акаунту, необхідно авторизуватись за допомогою Shopify CLI:
+Step 3: Shopify Authorization
+To connect to your Shopify account, you need to log in using Shopify CLI:
 
     shopify login --store your-store-name.myshopify.com
-  Замість your-store-name вкажіть домен вашого магазину на Shopify.
+  Replace your-store-name with the domain of your Shopify store.
 
-Крок 4: Підключення теми до магазину
-Після авторизації підключіть тему до вашого Shopify магазину:
+Step 4: Connecting the Theme to Your Store
+After logging in, connect the theme to your Shopify store:
 
     shopify theme push
-  Ця команда синхронізує вашу локальну тему з вашим магазином на Shopify.
+  This command will sync your local theme with your Shopify store.
 
-Крок 5: Запуск локального середовища
-Щоб запустити локальний сервер для роботи з темою, використовуйте команду:
+Step 5: Running the Local Environment
+To start a local server for working with the theme, use the command:
 
     shopify theme dev
 
-Додаткові кроки:
-Вам може бути потрібно встановити додаткові пакети:
+Additional Steps:
+You may need to install additional packages:
 
     npm install
