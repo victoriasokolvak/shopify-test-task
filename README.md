@@ -2,7 +2,7 @@
 
 This guide will help you set up and run a Shopify theme on your account locally, using a GitHub repository.
 
-## Вимоги
+## Requirements
 - **Shopify Store**
 - **Shopify CLI**
 - **Git**
